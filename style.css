@@ -6,8 +6,7 @@ body {
 
 #turnOrder{
 	width:100%;
-	max-width:600px;
-	margin:auto;
+	max-width:500px;
 }
 
 #buttons{
@@ -17,5 +16,11 @@ body {
 
 #revealButton{
 	width:100%
+
 	
+}
+
+#scaling{
+	width:100%;
+	max-width:10%
 }

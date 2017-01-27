@@ -12,11 +12,29 @@
 <button type ="player count" onclick="buttonPress(3)"> Three players </button>
 <button type ="player count" onclick="buttonPress(4)"> Four players </button>
 </div>
-
+<br>
 <div id = "turnOrder">
-	<img src ="images/cardBack.jpg" id = "card" onclick="takeTurn()" width = 50%/>
+	<img src ="images/cardBack.jpg" id = "deck" onclick="takeTurn()" width = 40%/>
+	<br>
+	<img id = "card1" width = 15%/>
+	<img id = "card2" width = 15%/>
+	<img id = "card3" width = 15%/>
+	<img id = "card4" width = 15%/>
+	<img id = "card5" width = 15%/>
+	<img id = "card6" width = 15%/>
+</div>
+<!--
+<div id = "scaling">
+<img src ="images/discard/p1.jpg" id = "test" width = 100%/>
+<img src ="images/discard/p2.jpg" id = "test" width = 100%/>
+<img src ="images/discard/p3.jpg" id = "test" width = 100%/>
+<img src ="images/discard/p4.jpg" id = "test" width = 100%/>
+<img src ="images/discard/nemesis.jpg" id = "test" width = 100%/>
+<img src ="images/discard/nemesis.jpg" id = "test" width = 100%/>
+-->
 </div>
 
+<br>
 <div id = "revealButton">
 <button type = "reveal" onClick="revealTop()"> Reveal top </button>
 <button type = "reveal" onClick="putBottom()"> Put top on bottom </button>
@@ -31,7 +49,8 @@
 
 turnDeck = [];
 turnDiscard = [];
-roundNum = 0;
+roundNum = 1;
+currentCard = 1;
 
 function buttonPress(numPlayers){
 	if (numPlayers==1){
@@ -50,7 +69,9 @@ function buttonPress(numPlayers){
 	turnDiscard = [];
 	shuffle();
 	showBack();
-	roundNum = 0;
+	hide();
+	roundNum = 1;
+	currentCard = 1;
 	setRoundNum();
 }
 
@@ -65,13 +86,18 @@ setRoundNum = function(){
 takeTurn = function(){
 	console.log(turnDeck[0]);
 	console.log(turnDeck);
-	turnDiscard.unshift(turnDeck.shift());
-	document.getElementById("card").src="images/" + turnDiscard[0] + ".jpg";
+	console.log(currentCard);
 	if (turnDeck.length == 0){
 		resetDeck();
 		roundNum = roundNum+1;
 		setRoundNum();
+		hide();
 	}
+	document.getElementById("card" + currentCard).style.visibility="visible";
+	turnDiscard.unshift(turnDeck.shift());
+	document.getElementById("card" + currentCard).src="images/" + turnDiscard[0] + ".jpg";
+	currentCard = currentCard + 1;
+	showBack();
 }
         
 resetDeck = function(){
@@ -79,10 +105,11 @@ resetDeck = function(){
                 turnDeck.push(turnDiscard.shift());
         shuffle()
 		}
+		currentCard = 1;
 }
 
 revealTop = function(){
-	document.getElementById("card").src="images/" + turnDeck[0] + ".jpg";
+	document.getElementById("deck").src="images/" + turnDeck[0] + ".jpg";
 }
 
 putBottom = function(){
@@ -91,7 +118,16 @@ putBottom = function(){
 };
 
 showBack = function(){
-	document.getElementById("card").src="images/cardBack.jpg";
+	document.getElementById("deck").src="images/cardBack.jpg";
+}
+
+hide = function(){
+	document.getElementById("card1").style.visibility="hidden";
+	document.getElementById("card2").style.visibility="hidden";
+	document.getElementById("card3").style.visibility="hidden";
+	document.getElementById("card4").style.visibility="hidden";
+	document.getElementById("card5").style.visibility="hidden";
+	document.getElementById("card6").style.visibility="hidden";
 }
 
 window.onload = function() {
