@@ -14,7 +14,7 @@
 </div>
 <br>
 <div id = "turnDeck">
-	<img src ="images/cardBack.jpg" id = "deck" onclick="takeTurn()" width = 280px/>
+	<img src ="images/cardBack.jpg" id = "deck" onclick="takeTurn()" width = "280px"/>
 	<br>
 </div>
 <!--
@@ -28,14 +28,13 @@
 </div>
 -->
 <div id = "scaling">
-<img src ="images/discard/p1.jpg" id = "card1" width = 200px/>
-<img src ="images/discard/p2.jpg" id = "card2" width = 200px/>
-<img src ="images/discard/p3.jpg" id = "card3" width = 200px/>
-<img src ="images/discard/p4.jpg" id = "card4" width = 200px/>
-<img src ="images/discard/nemesis.jpg" id = "card5" width = 200px/>
-<img src ="images/discard/nemesis.jpg" id = "card6" width = 200px/>
+<img src ="images/discard/p1.jpg" id = "card1" onclick="shuffleOne(0)" width = "200px">
+<img src ="images/discard/p2.jpg" id = "card2" onclick="shuffleOne(1)" width = "200px">
+<img src ="images/discard/p3.jpg" id = "card3" onclick="shuffleOne(2)" width = "200px">
+<img src ="images/discard/p4.jpg" id = "card4" onclick="shuffleOne(3)" width = "200px">
+<img src ="images/discard/nemesis.jpg" id = "card5" onclick="shuffleOne(4)" width = "200px">
+<img src ="images/discard/nemesis.jpg" id = "card6" onclick="shuffleOne(5)" width = "200px">
 </div>
-
 <br>
 <div id = "revealButton">
 <button class = "button" onClick="revealTop()"> Reveal top </button>
@@ -43,7 +42,7 @@
 <button class = "button" onClick="resetDeck()"> Shuffle Deck </button>
 </div>
 </body>
-<p id = "roundNum"> Current Round: 0 </p>
+<!--<p id = "roundNum"> Current Round: 0 </p>-->
 
 <script src ="Underscore.js" type="text/javascript">
 </script>
@@ -52,7 +51,7 @@
 
 turnDeck = [];
 turnDiscard = [];
-roundNum = 1;
+//roundNum = 1;
 currentCard = 1;
 
 function buttonPress(numPlayers){
@@ -73,31 +72,34 @@ function buttonPress(numPlayers){
 	shuffle();
 	showBack();
 	hide();
-	roundNum = 1;
+	//roundNum = 1;
 	currentCard = 1;
-	setRoundNum();
+	//setRoundNum();
 }
 
 shuffle = function(){
+	//console.log(turnDeck);
 	turnDeck = _.shuffle(turnDeck);
+	//console.log(turnDeck);
 }
 
-setRoundNum = function(){
-	document.getElementById("roundNum").innerHTML = "Current Round: " + roundNum;
-}
+//setRoundNum = function(){
+//	document.getElementById("roundNum").innerHTML = "Current Round: " + roundNum;
+//}
 
 takeTurn = function(){
-	console.log(turnDeck[0]);
+	//console.log(turnDeck[0]);
 	console.log(turnDeck);
-	console.log(currentCard);
+	//console.log(currentCard);
 	if (turnDeck.length == 0){
 		resetDeck();
-		roundNum = roundNum+1;
-		setRoundNum();
+		//roundNum = roundNum+1;
+		//setRoundNum();
 	}
 	document.getElementById("card" + currentCard).style.visibility="visible";
-	turnDiscard.unshift(turnDeck.shift());
-	document.getElementById("card" + currentCard).src="images/discard/" + turnDiscard[0] + ".jpg";
+	turnDiscard.push(turnDeck.shift());
+	currentLen = turnDiscard.length;
+	document.getElementById("card" + currentCard).src="images/discard/" + turnDiscard[currentLen-1] + ".jpg";
 	currentCard = currentCard + 1;
 	if (turnDeck.length == 0){
 		document.getElementById("deck").src="images/empty.jpg";
@@ -109,10 +111,11 @@ takeTurn = function(){
         
 resetDeck = function(){
         while (turnDiscard.length > 0){
+				console.log(turnDeck)
                 turnDeck.push(turnDiscard.shift());
-        shuffle()
 		}
-		hide()
+		shuffle();
+		hide();
 		currentCard = 1;
 		showBack();
 }
@@ -143,6 +146,24 @@ hide = function(){
 	document.getElementById("card4").style.visibility="hidden";
 	document.getElementById("card5").style.visibility="hidden";
 	document.getElementById("card6").style.visibility="hidden";
+}
+
+shuffleOne = function(i){
+	spliced = turnDiscard.splice(i,1);
+	console.log(i);
+	console.log(turnDiscard);
+	console.log(spliced);
+	turnDeck.push(spliced[0])
+	console.log(turnDeck);
+	shuffle();
+	hide();
+	for(j = 1; j < turnDiscard.length+1; j++){
+		document.getElementById("card" + j).style.visibility="visible";
+		document.getElementById("card" + j).src="images/discard/" + turnDiscard[j-1] + ".jpg";
+		
+	}
+	currentCard = currentCard - 1;
+	showBack();
 }
 
 window.onload = function() {
