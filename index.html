@@ -7,15 +7,18 @@
 </head>
 <body>
 <div id = "buttons">
-<button type ="player count" onclick="buttonPress(1)"> Solo </button>
-<button type ="player count" onclick="buttonPress(2)"> Two players </button>
-<button type ="player count" onclick="buttonPress(3)"> Three players </button>
-<button type ="player count" onclick="buttonPress(4)"> Four players </button>
+<button class = "button" onclick="buttonPress(1)"> Solo </button>
+<button class = "button" onclick="buttonPress(2)"> Two players </button>
+<button class = "button" onclick="buttonPress(3)"> Three players </button>
+<button class = "button" onclick="buttonPress(4)"> Four players </button>
 </div>
 <br>
-<div id = "turnOrder">
+<div id = "turnDeck">
 	<img src ="images/cardBack.jpg" id = "deck" onclick="takeTurn()" width = 40%/>
 	<br>
+</div>
+<!--
+<div id = "revealedCards">
 	<img id = "card1" width = 15%/>
 	<img id = "card2" width = 15%/>
 	<img id = "card3" width = 15%/>
@@ -23,21 +26,21 @@
 	<img id = "card5" width = 15%/>
 	<img id = "card6" width = 15%/>
 </div>
-<!--
-<div id = "scaling">
-<img src ="images/discard/p1.jpg" id = "test" width = 100%/>
-<img src ="images/discard/p2.jpg" id = "test" width = 100%/>
-<img src ="images/discard/p3.jpg" id = "test" width = 100%/>
-<img src ="images/discard/p4.jpg" id = "test" width = 100%/>
-<img src ="images/discard/nemesis.jpg" id = "test" width = 100%/>
-<img src ="images/discard/nemesis.jpg" id = "test" width = 100%/>
 -->
+<div id = "scaling">
+<img src ="images/discard/p1.jpg" id = "card1" width = 100%/>
+<img src ="images/discard/p2.jpg" id = "card2" width = 100%/>
+<img src ="images/discard/p3.jpg" id = "card3" width = 100%/>
+<img src ="images/discard/p4.jpg" id = "card4" width = 100%/>
+<img src ="images/discard/nemesis.jpg" id = "card5" width = 100%/>
+<img src ="images/discard/nemesis.jpg" id = "card6" width = 100%/>
 </div>
 
 <br>
 <div id = "revealButton">
-<button type = "reveal" onClick="revealTop()"> Reveal top </button>
-<button type = "reveal" onClick="putBottom()"> Put top on bottom </button>
+<button class = "button" onClick="revealTop()"> Reveal top </button>
+<button class = "button" onClick="putBottom()"> Put top on bottom </button>
+<button class = "button" onClick="resetDeck()"> Shuffle Deck </button>
 </div>
 </body>
 <p id = "roundNum"> Current Round: 0 </p>
@@ -91,13 +94,17 @@ takeTurn = function(){
 		resetDeck();
 		roundNum = roundNum+1;
 		setRoundNum();
-		hide();
 	}
 	document.getElementById("card" + currentCard).style.visibility="visible";
 	turnDiscard.unshift(turnDeck.shift());
-	document.getElementById("card" + currentCard).src="images/" + turnDiscard[0] + ".jpg";
+	document.getElementById("card" + currentCard).src="images/discard/" + turnDiscard[0] + ".jpg";
 	currentCard = currentCard + 1;
-	showBack();
+	if (turnDeck.length == 0){
+		document.getElementById("deck").src="images/empty.jpg";
+	}
+	else {
+		showBack();
+	}
 }
         
 resetDeck = function(){
@@ -105,14 +112,21 @@ resetDeck = function(){
                 turnDeck.push(turnDiscard.shift());
         shuffle()
 		}
+		hide()
 		currentCard = 1;
 }
 
 revealTop = function(){
+	if (turnDeck.length == 0){
+		resetDeck();
+	}
 	document.getElementById("deck").src="images/" + turnDeck[0] + ".jpg";
 }
 
 putBottom = function(){
+	if (turnDeck.length == 0){
+		resetDeck();
+	}
 	turnDeck.push(turnDeck.shift());
 	showBack();
 };
