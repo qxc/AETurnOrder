@@ -3,21 +3,7 @@ body {
 	font-size: 20px;
 	color: #fee86e;
 }
-
-.button{
-	background-color: black; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-}
-
 #turnDeck{
-	width:80%;
-	max-width:670px;
 }
 
 #revealedCards{
@@ -25,7 +11,7 @@ body {
 }
 
 #scaling{
-	width:80%;
+	max-width:500px;
 	position:absolute;
 	left:300;
 	top:80;
@@ -46,3 +32,15 @@ body {
 	width:100%;
 	max-width:10%
 }
+
+.button{
+	background-color: black; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+

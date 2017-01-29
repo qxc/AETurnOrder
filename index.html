@@ -14,7 +14,7 @@
 </div>
 <br>
 <div id = "turnDeck">
-	<img src ="images/cardBack.jpg" id = "deck" onclick="takeTurn()" width = 40%/>
+	<img src ="images/cardBack.jpg" id = "deck" onclick="takeTurn()" width = 280px/>
 	<br>
 </div>
 <!--
@@ -28,12 +28,12 @@
 </div>
 -->
 <div id = "scaling">
-<img src ="images/discard/p1.jpg" id = "card1" width = 100%/>
-<img src ="images/discard/p2.jpg" id = "card2" width = 100%/>
-<img src ="images/discard/p3.jpg" id = "card3" width = 100%/>
-<img src ="images/discard/p4.jpg" id = "card4" width = 100%/>
-<img src ="images/discard/nemesis.jpg" id = "card5" width = 100%/>
-<img src ="images/discard/nemesis.jpg" id = "card6" width = 100%/>
+<img src ="images/discard/p1.jpg" id = "card1" width = 200px/>
+<img src ="images/discard/p2.jpg" id = "card2" width = 200px/>
+<img src ="images/discard/p3.jpg" id = "card3" width = 200px/>
+<img src ="images/discard/p4.jpg" id = "card4" width = 200px/>
+<img src ="images/discard/nemesis.jpg" id = "card5" width = 200px/>
+<img src ="images/discard/nemesis.jpg" id = "card6" width = 200px/>
 </div>
 
 <br>
@@ -114,6 +114,7 @@ resetDeck = function(){
 		}
 		hide()
 		currentCard = 1;
+		showBack();
 }
 
 revealTop = function(){
