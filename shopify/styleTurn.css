@@ -1,0 +1,88 @@
+body {
+	background: #426176; /*url("images/pnpPlaymat.jpg") repeat top;*/
+	font-size: 20px;
+	color: #fee86e;
+}
+#turnDeck{
+	max-width:300px;
+}
+
+#revealedCards{
+	max-width:600px;
+}
+
+#scaling{
+	max-width:500px;
+	position:absolute;
+	left:425;
+	top:100;
+}
+
+#buttons{
+	width:1000px;
+}
+
+#revealButton{
+	width:100%
+
+	
+}
+
+#scaling{
+	width:100%;
+	max-width:100px;
+}
+
+.buttonAlt{
+	height:60px;
+	background-color: red; /* Green */
+    font-family:"Arial Black";
+	border: 1px solid white;
+    color: white;
+    padding: 3px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+	outline: none;
+	box-shadow: 0 3px #999;
+	
+	
+}
+/*
+.buttonAlt:hover{
+	background-color: red;
+    color: white;
+}
+*/
+.buttonAlt:active{
+	box-shadow 0 1px #666;
+	transform: translateY(4px);
+}
+
+.button{
+	height: 50px;
+	background-color: black; /* Green */
+    font-family:"Arial Black";
+	border: 1px solid white;
+    color: white;
+    padding: 3px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+	outline: none;
+	box-shadow: 0 3px #999;
+	
+	
+}
+/*
+.button:hover{
+	background-color: red;
+    color: white;
+}
+*/
+.button:active{
+	box-shadow 0 1px #666;
+	transform: translateY(4px);
+}
